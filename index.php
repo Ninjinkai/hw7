@@ -1,7 +1,8 @@
 <?php
+// Link to header, which directs the rest of the pages.
   require_once 'header.php';
 ?>
-</div>
-    </span><br><br>
-  </body>
+	</div>
+	<br><br>
+</body>
 </html>

@@ -1,12 +1,16 @@
 <?php
+// Use session to determine if user is signed in.
   session_start();
 
+// Beging HTML header.
   echo "<!DOCTYPE html>\n<html>\n<head>\n";
 
+// Connect to database and establish backend control functions.
   require_once 'functions.php';
 
   $userstr = ' (Guest)';
 
+// Check if user is signed in.
   if (isset($_SESSION['user']))
   {
     $user     = $_SESSION['user'];
@@ -25,8 +29,12 @@
 <?php
 echo "  <title>$appname</title>\n";
 ?>
+  <!-- Stylesheets -->
   <link rel='stylesheet' href='css/bootstrap.css' type='text/css'>
   <link rel='stylesheet' href='css/signin.css' type='text/css'>
+  <link rel='stylesheet' href='css/styles.css' type='text/css'>
+  <!-- Javascript -->
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -35,20 +43,19 @@ echo "  <title>$appname</title>\n";
 </head>
 <body>
   <div class="container">
-    <form class="form-signin">
+    <form id="primaryForm" class="form-signin">
 <?php      
   echo "<h2 class=\"form-signin-heading\">Welcome to $appname</h2>\n";
 
   if ($loggedin)
   {
-    echo "<a class=\"btn btn-lg btn-primary btn-block\" href=\"logout.php\" role=\"button\">Sign out</a>\n";
-    echo "<br>\n<p>$user is logged in.</p>\n";
+    echo "<a id=\"signOutBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"logout.php\" role=\"button\">Sign out</a>\n".
+      "<a id=\"appNameBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"wall.php\" role=\"button\">$appname</a>\n";
   }
   else
   {
-    echo "<a class=\"btn btn-lg btn-primary btn-block\" href=\"signup.php\" role=\"button\">Sign up</a>\n" .
-      "<a class=\"btn btn-lg btn-primary btn-block\" href=\"login.php\" role=\"button\">Sign in</a>\n";
+    echo "<a id=\"signUpBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"signup.php\" role=\"button\">Sign up</a>\n" .
+      "<a id=\"signInBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"signin.php\" role=\"button\">Sign in</a>\n";
   }
 ?>
     </form>
- <!--  </div> -->

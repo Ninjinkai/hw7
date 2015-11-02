@@ -4,11 +4,22 @@
   if (isset($_SESSION['user']))
   {
     destroySession();
-    echo "<div class='main'>You have been logged out. Please " .
-         "<a href='index.php'>click here</a> to refresh the screen.";
+echo <<<_END
+  <script>
+      $("#primaryForm").remove();
+  </script>
+  <div class='main container'>You have been signed out. Please <a href='index.php'>click here</a> to refresh the screen.
+_END;
   }
-  else echo "<div class='main'><br>" .
-            "You cannot log out because you are not logged in";
+  else
+  { 
+echo <<<_END
+  <script>
+      $("#primaryForm").remove();
+    </script>
+  <div class='main container'>You cannot sign out because you are not signed in.
+_END;
+  }
 ?>
 
     <br><br></div>
