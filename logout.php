@@ -5,6 +5,7 @@
   if (isset($_SESSION['user']))
   {
     destroySession();
+// Show sign out confirmation, direct to index.
 echo <<<_END
   <script>
       $("#primaryForm").remove();
@@ -13,7 +14,8 @@ echo <<<_END
 _END;
   }
   else
-  { 
+  {
+// If a user reaches this page without being signed in, they are directed to the index.
 echo <<<_END
   <script>
       $("#primaryForm").remove();

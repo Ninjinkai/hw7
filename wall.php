@@ -4,11 +4,12 @@ session_start();
 // Begin HTML header.
   echo "<!DOCTYPE html>\n<html>\n<head>\n";
 
-// Connect to database, check if user is signed in.
+// Connect to database.
   require_once 'functions.php';
 
   $userstr = ' (Guest)';
 
+// Check if user is signed in.
   if (isset($_SESSION['user']))
   {
     $user     = $_SESSION['user'];
@@ -71,7 +72,7 @@ _END;
 	}
 else
 	{
-// Redirect to index page.
+// Redirect to index page if visitor is not signed in.
 echo <<<_END
 	<div class="main container">
 		<p>You must <a href="index.php" role="button">sign in</a> to view this page.</p>

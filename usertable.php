@@ -58,13 +58,13 @@ if($db->query($createStmt)) {
 <?php
 // Add two rows to the table.  These are sample users with salted and hashed passwords.
 $pw_temp = "Password";
-$salt1 = "qm&h*";
-$salt2 = "pg!@";
+$salt1 = "2Qs0r@";
+$salt2 = "J0n@$";
 $token = hash('ripemd128', "$salt1$pw_temp$salt2");
 
 $insertStmt = 'INSERT INTO `USERS` (`userid`, `password`)' . PHP_EOL
-            . '  VALUES (\'Person 1\', \''.$token.'\'),' . PHP_EOL
-            . '   (\'Person 2\', \''.$token.'\');';
+            . '  VALUES (\'User.1\', \''.$token.'\'),' . PHP_EOL
+            . '   (\'User.2\', \''.$token.'\');';
 ?>
       <div id="step-two" class="well">
         <h3>Step Two <small>Inserting into the table</small></h3>
