@@ -1,8 +1,10 @@
 <?php
 session_start();
 
+// Begin HTML header.
   echo "<!DOCTYPE html>\n<html>\n<head>\n";
 
+// Connect to database, check if user is signed in.
   require_once 'functions.php';
 
   $userstr = ' (Guest)';
@@ -14,8 +16,6 @@ session_start();
     $userstr  = " ($user)";
   }
   else $loggedin = FALSE;
-
-
 ?>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,9 +27,9 @@ session_start();
 <?php
 echo "  <title>$appname</title>\n";
 ?>
+	<!-- Stylesheets -->
 	<link rel='stylesheet' href='css/bootstrap.css' type='text/css'>
 	<link rel='stylesheet' href='css/jumbotron.css' type='text/css'>
-	<link rel='stylesheet' href='css/signin.css' type='text/css'>
 	<!-- Javascript -->
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,28 +39,54 @@ echo "  <title>$appname</title>\n";
 	<![endif]-->
 </head>
 <body>
-
 <?php
 if ($loggedin)
 	{
-		echo "<!-- Navigation bar. -->\n" .
-			"<nav class=\"navbar navbar-inverse navbar-fixed-top\">\n" .
-    			"<div class=\"container\">\n" .
- 					"<div class=\"navbar-header\">\n" .
- 						"<p>$user is signed in.</p>\n" .
-            			"<a class=\"btn btn-lg btn-primary\" href=\"logout.php\" role=\"button\">Sign out</a>\n" .
- 			"</div>\n</div>\n</nav>\n";		
-		echo "<div class=\"container well\">\n" .
-		"<div class=\"row\">\n" .
-			"<div class=\"col-md-8\"><img src=\"https://upload.wikimedia.org/wikipedia/commons/8/8e/Solna_Brick_wall_Stretcher_bond_variation1.jpg\" width=\"100%\" /></div>\n" .
-			"<div class=\"col-md-4\">\n" .
-				"<p>Posted by:<br>Nick<br>Description<br>A wall pic.</p>\n" .
-			"</div>\n</div>\n</div>\n";
+// Placeholder HTML for photo sharing wall.  Allows pictures and text.
+echo <<<_END
+		<!-- Navigation bar. -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<p class="navbar-text">$user
+						<a class="btn btn-lg btn-primary navbar-btn" href="logout.php" role="button">Sign out</a>
+						<a class="btn btn-lg btn-primary navbar-btn" href="#" role="button">Post a pic</a>
+					</p>
+				</div>
+			</div>
+		</nav>
+		<!-- Page content. -->
+		<div class="container well">
+			<div class="row">
+				<div class="col-md-8">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Solna_Brick_wall_Stretcher_bond_variation1.jpg" width="100%"" />
+				</div>
+				<div class="col-md-4">
+					<p>Posted by:<br>Nick<br>Description:<br>A wall pic.</p>
+				</div>
+			</div>
+		</div>
+
+_END;
 	}
 else
 	{
-		echo "<br>\n<p>You must be signed in to view this page.</p>\n" .
-		"<a class=\"btn btn-lg btn-primary\" href=\"index.php\" role=\"button\">Home</a>\n";
+// Redirect to index page.
+echo <<<_END
+	<div class="main container">
+		<p>You must <a href="index.php" role="button">sign in</a> to view this page.</p>
+	</div>
+_END;
 	}
+
+	$db->close();
 ?>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
 </body>
+</html>

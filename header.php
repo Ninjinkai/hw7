@@ -2,7 +2,7 @@
 // Use session to determine if user is signed in.
   session_start();
 
-// Beging HTML header.
+// Begining HTML header.
   echo "<!DOCTYPE html>\n<html>\n<head>\n";
 
 // Connect to database and establish backend control functions.
@@ -47,15 +47,20 @@ echo "  <title>$appname</title>\n";
 <?php      
   echo "<h2 class=\"form-signin-heading\">Welcome to $appname</h2>\n";
 
+// Users that are signed in can sign out or go to the wall, otherwise they can sign in or sign up.
   if ($loggedin)
   {
-    echo "<a id=\"signOutBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"logout.php\" role=\"button\">Sign out</a>\n".
-      "<a id=\"appNameBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"wall.php\" role=\"button\">$appname</a>\n";
+echo <<<_END
+      <a id="signOutBtn" class="btn btn-lg btn-primary btn-block" href="logout.php" role="button">Sign out</a>
+      <a id="appNameBtn" class="btn btn-lg btn-primary btn-block" href="wall.php" role="button">$appname</a>
+_END;
   }
   else
   {
-    echo "<a id=\"signUpBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"signup.php\" role=\"button\">Sign up</a>\n" .
-      "<a id=\"signInBtn\" class=\"btn btn-lg btn-primary btn-block\" href=\"signin.php\" role=\"button\">Sign in</a>\n";
+echo <<<_END
+      <a id="signUpBtn" class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Sign up</a>
+      <a id="signInBtn" class="btn btn-lg btn-primary btn-block" href="signin.php" role="button">Sign in</a>
+_END;
   }
 ?>
     </form>

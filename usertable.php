@@ -17,7 +17,8 @@ require_once 'db_connect.php';
       </div>
 
       <?php
-// Drop the USERS table now that we're done with it
+// Drop the USERS table and if it exists so that it can be recreated to initialize the database.
+// This step was moved to the front so that the database is still available for the application to use.
 $dropStmt = 'DROP TABLE IF EXISTS `USERS`;';
 ?>
       <div id="step-four" class="well">
@@ -34,7 +35,7 @@ if($db->query($dropStmt)) {
       </div>
 
 <?php
-// Create table with two columns: userid and password
+// Create table with two columns: userid and password.
 $createStmt = 'CREATE TABLE `USERS` (' . PHP_EOL
             . '  `userid` varchar(32) NOT NULL,' . PHP_EOL
             . '  `password` varchar(32) DEFAULT NULL,' . PHP_EOL
@@ -49,14 +50,13 @@ if($db->query($createStmt)) {
     echo '        <div class="alert alert-success">Table creation successful.</div>' . PHP_EOL;
 } else {
     echo '        <div class="alert alert-danger">Table creation failed: (' . $db->errno . ') ' . $db->error . '</div>' . PHP_EOL;
-    exit(); // Prevents the rest of the file from running
+    exit(); // Prevents the rest of the file from running.
 }
 ?>
       </div>
 
 <?php
-// Add two rows to the table
-
+// Add two rows to the table.  These are sample users with salted and hashed passwords.
 $pw_temp = "Password";
 $salt1 = "qm&h*";
 $salt2 = "pg!@";
@@ -80,7 +80,7 @@ if($db->query($insertStmt)) {
       </div>
 
 <?php
-// Get the rows from the table
+// Get the rows from the table.
 $selectStmt = 'SELECT * FROM `USERS`;';
 ?>
       <div id="step-three" class="well">

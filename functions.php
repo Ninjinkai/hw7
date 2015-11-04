@@ -1,8 +1,10 @@
 <?php
   require_once 'db_connect.php';
 
+// The app can be renamed through this variable.
   $appname = "WallPics";
 
+// Runs a MySQL query and returns results or an error message.
   function queryMysql($query)
   {
     global $db;
@@ -11,6 +13,7 @@
     return $result;
   }
 
+// Ends the signed in session.
   function destroySession()
   {
     $_SESSION=array();
@@ -21,6 +24,7 @@
     session_destroy();
   }
 
+// Sanitizes the username and password strings.
   function sanitizeString($var)
   {
     global $db;
